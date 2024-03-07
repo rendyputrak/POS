@@ -2,18 +2,10 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\LevelController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 // Halaman Home
 Route::get('/home', function () {
@@ -33,10 +25,17 @@ Route::get('/category', function () {
 });
 
 // Halaman User
-Route::get('user/{id?}/name/{name?}', function($id = null, $name = null) {
-    return 'ID = ' . $id . ' Nama = ' . $name;
-});
+// Route::get('user/{id?}/name/{name?}', function($id = null, $name = null) {
+//     return 'ID = ' . $id . ' Nama = ' . $name;
+// });
 
 // Halaman Penjualan
 Route::get('/penjualan', [PenjualanController::class,'penjualan']);
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/level', [LevelController::class,'index']);
+Route::get('/kategori', [KategoriController::class,'index']);
+Route::get('/user', [UserController::class, 'index']);
