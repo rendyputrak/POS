@@ -25,17 +25,14 @@ Route::get('/category', function () {
     return 'Isi Kategori di URL (foodbeverage, beautyhealth, homecare, baby)';
 });
 
-// Halaman User
-// Route::get('user/{id?}/name/{name?}', function($id = null, $name = null) {
-//     return 'ID = ' . $id . ' Nama = ' . $name;
-// });
-
 // Halaman Penjualan
 Route::get('/penjualan', [PenjualanController::class,'penjualan']);
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/level', [LevelController::class,'index']);
 Route::get('/kategori', [KategoriController::class,'index']);
@@ -48,6 +45,9 @@ Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
 Route::get('/user/hapus/{id}', [UserController::class,'hapus']); 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::get('/kategori', [KategoriController::class, 'index']);
+
+Route::get('/kategori/create', [KategoriController::class, 'create']);
+Route::post('/kategori', [KategoriController::class, 'store']);
