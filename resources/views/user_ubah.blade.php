@@ -6,7 +6,7 @@
     <title>Form Ubah Data User</title>
 </head>
 <body>
-    <form action="/POS/public/user/ubah_simpan/{{$data->user_id}}" method="post">
+    <form action="/user/ubah_simpan/{{$data->user_id}}" method="post">
     {{ csrf_field() }}
     {{ method_field('PUT') }}
         <label>Username</label>
