@@ -10,6 +10,9 @@
     <div class="container">
         <div class="card">
             <div class="card-header">Manage Kategori</div>
+            <div class="col-auto m-2">
+                <a class="btn btn-primary ml auto" href="../kategori/create" role="button">Tambah Kategori</a>
+            </div>
             <div class="card-body">
                 {{ $dataTable->table() }}
             </div>
