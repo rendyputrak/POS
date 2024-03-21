@@ -322,6 +322,10 @@ return [
             'label' => 4,
             'label_color' => 'success',
         ],
+        [
+            'text' => 'Kategori',
+            'url' => '/kategori',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
