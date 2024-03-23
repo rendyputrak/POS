@@ -28,6 +28,8 @@ class KategoriDataTable extends DataTable
                 '<div class="d-flex">
                 <a href="/kategori/edit/' . $row->kategori_id .'" class="btn btn-primary" >Edit</a>
                 
+                <a href="/kategori/delete/' . $row->kategori_id .'" class="btn btn-danger" >Hapus</a>
+                
                 </div>';
             })
             ->setRowId('id');

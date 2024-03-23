@@ -56,4 +56,10 @@ class KategoriController extends Controller
         ]);
         return redirect('/kategori');
     }
+
+    public function delete($id) {
+        $kategori = KategoriModel::find($id);
+        $kategori->delete();
+        return redirect('/kategori');
+    }
 }
