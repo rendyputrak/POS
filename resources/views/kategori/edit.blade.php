@@ -4,7 +4,7 @@
 
 @section('subtitle', 'Kategori')
 @section('content_header_title', 'Kategori')
-@section('content_header_subtitle', 'Create')
+@section('content_header_subtitle', 'Edit')
 
 {{-- Content body: main page content --}}
 
@@ -12,19 +12,20 @@
     <div class="container">
         <div class="card card-primary">
             <div class="card-header">
-            <h3 class="card-title">Buat kategori baru</h3>
+            <h3 class="card-title">Ubah Kategori</h3>
             </div>
 
-            <form method="post" action="../kategori">
+            <form method="post" action="/kategori/storeedit/">
                 {{ csrf_field() }}
                 <div class="card-body">
                     <div class="form-group">
                         <label for="kodeKategori">Kode Kategori</label>
-                        <input type="text" class="form-control" id="kodeKategori" name="kodeKategori" placeholder="Contoh=A,B,C,D">
+                        <input type="hidden" name="id" value="{{ $kategori->kategori_id }}">
+                        <input type="text" class="form-control" id="kodeKategori" name="kodeKategori" value="{{ $kategori->kategori_kode }}" placeholder="Contoh=A,B,C,D">
                     </div>
                     <div class="form-group">
                         <label for="namaKategori">Nama Kategori</label>
-                        <input type="text" class="form-control" id="namaKategori" name="namaKategori" placeholder="Contoh=Elektronik dan Gadget">
+                        <input type="text" class="form-control" id="namaKategori" name="namaKategori" value="{{ $kategori->kategori_nama }}" placeholder="Contoh=Elektronik dan Gadget">
                     </div>
                 </div>
 

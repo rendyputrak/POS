@@ -42,4 +42,18 @@ class KategoriController extends Controller
         ]);
         return redirect('/kategori');
     }
+    
+    public function edit($id) {
+        $kategori = KategoriModel::find($id);
+        return view('kategori.edit')->with('kategori', $kategori);
+    }
+
+    public function storeEdit(Request $request)
+    {
+        KategoriModel::where('kategori_id', $request->id)->update([
+            'kategori_kode' => $request->kodeKategori,
+            'kategori_nama' => $request->namaKategori,
+        ]);
+        return redirect('/kategori');
+    }
 }
