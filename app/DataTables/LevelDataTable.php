@@ -22,7 +22,7 @@ class LevelDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'level.action')
+            // ->addColumn('action', 'level.action')
             ->setRowId('id');
     }
 
@@ -62,11 +62,11 @@ class LevelDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+            // Column::computed('action')
+            //       ->exportable(false)
+            //       ->printable(false)
+            //       ->width(60)
+            //       ->addClass('text-center'),
             Column::make('level_id'),
             Column::make('level_kode'),
             Column::make('level_nama'),

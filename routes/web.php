@@ -57,3 +57,7 @@ Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit']);
 Route::post('/kategori/storeedit', [KategoriController::class, 'storeEdit']);
 //Routing untuk hapus kategori
 Route::get('/kategori/delete/{id}', [KategoriController::class, 'delete']);
+
+//Routing form level
+Route::get('/level', [LevelController::class, 'index']);
+Route::get('/level/create', [LevelController::class, 'create']);
