@@ -5,17 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\UserModel;
+use App\DataTables\UserDataTable;
 
 class UserController extends Controller
 {
-    public function index() {
-        
-        $user = UserModel::with('level')->get();
-        // dd($user);
-        return view ('user', ['data' => $user]);
+    public function index(UserDataTable $dataTable) {
+        return $dataTable->render('user.index');
     }
     public function tambah() {
-        return view ('user_tambah');
+        return view ('user.create');
     }
     public function tambah_simpan(Request $request) {
         UserModel::create([

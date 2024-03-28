@@ -37,22 +37,23 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/level', [LevelController::class,'index']);
 Route::get('/kategori', [KategoriController::class,'index']);
 Route::get('/user', [UserController::class, 'index']);
-
-Route::get('/user/tambah', [UserController::class, 'tambah']);
-Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
-Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
-Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
-Route::get('/user/hapus/{id}', [UserController::class,'hapus']); 
 Auth::routes();
 
-
+//Routing untuk tambah user
+Route::get('/user/tambah', [UserController::class, 'tambah']);
+Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
+//Routing untuk ubah user
+Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
+Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
+//Routing untuk hapus kategori
+Route::get('/user/hapus/{id}', [UserController::class,'hapus']); 
 
 Route::get('/kategori', [KategoriController::class, 'index']);
-
+//Routing untuk tambah kategori
 Route::get('/kategori/create', [KategoriController::class, 'create']);
 Route::post('/kategori', [KategoriController::class, 'store']);
-
+//Routing untuk edit kategori
 Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit']);
 Route::post('/kategori/storeedit', [KategoriController::class, 'storeEdit']);
-
+//Routing untuk hapus kategori
 Route::get('/kategori/delete/{id}', [KategoriController::class, 'delete']);

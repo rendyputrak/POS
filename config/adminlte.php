@@ -326,6 +326,14 @@ return [
             'text' => 'Kategori',
             'url' => '/kategori',
         ],
+        [
+            'text' => 'User',
+            'url' => '/user',
+        ],
+        [
+            'text' => 'Level',
+            'url' => '/level',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
