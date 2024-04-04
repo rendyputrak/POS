@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\POSController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -61,3 +62,5 @@ Route::get('/kategori/delete/{id}', [KategoriController::class, 'delete']);
 //Routing form level
 Route::get('/level', [LevelController::class, 'index']);
 Route::get('/level/create', [LevelController::class, 'create']);
+
+Route::resource('m_user', POSController::class);
