@@ -6,6 +6,7 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\POSController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,10 +29,6 @@ Route::get('/category', function () {
 
 // Halaman Penjualan
 Route::get('/penjualan', [PenjualanController::class,'penjualan']);
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -64,3 +61,6 @@ Route::get('/level', [LevelController::class, 'index']);
 Route::get('/level/create', [LevelController::class, 'create']);
 
 Route::resource('m_user', POSController::class);
+
+//PWL Starter Code
+Route::get('/', [WelcomeController::class, 'index']);
