@@ -7,35 +7,35 @@
         <div class="card-tools"></div> 
       </div> 
       <div class="card-body"> 
-        @empty($user) 
+        @empty($barang) 
             <div class="alert alert-danger alert-dismissible"> 
                 <h5><i class="icon fas fa-ban"></i> Kesalahan! Data yang Anda cari tidak ditemukan. </h5>
             </div> 
         @else 
             <table class="table table-bordered table-striped table-hover tablesm"> 
                 <tr> 
-                    <th>ID</th> 
-                    <td>{{ $user->user_id }}</td> 
+                    <th>ID Barang</th> 
+                    <td>{{ $barang->barang_id }}</td> 
                 </tr> 
                 <tr> 
-                    <th>Level</th> 
-                    <td>{{ $user->level->level_nama }}</td> 
+                    <th>ID Kategori</th> 
+                    <td>{{ $barang->kategori_id . " (" .($barang->kategori->kategori_nama).")" }}</td> 
                 </tr> 
                 <tr> 
-                    <th>Username</th> 
-                    <td>{{ $user->username }}</td> 
+                    <th>Nama Barang</th> 
+                    <td>{{ $barang->barang_nama }}</td> 
                 </tr> 
                 <tr> 
-                    <th>Nama</th> 
-                    <td>{{ $user->nama }}</td> 
+                    <th>Harga Beli</th> 
+                    <td>{{ $barang->harga_beli }}</td> 
                 </tr> 
                 <tr> 
-                    <th>Password</th> 
-                    <td>********</td> 
+                    <th>Harga Jual</th> 
+                    <td>{{ $barang->harga_jual }}</td> 
                 </tr> 
             </table> 
         @endempty 
-        <a href="{{ url('user') }}" class="btn btn-sm btn-default mt-2">Kembali</a> 
+        <a href="{{ url('barang') }}" class="btn btn-sm btn-default mt-2">Kembali</a> 
     </div> 
   </div> 
 @endsection 

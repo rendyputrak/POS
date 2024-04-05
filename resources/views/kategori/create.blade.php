@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.template')
 
 {{-- Customize layout sections --}}
 
@@ -25,11 +25,11 @@
                 </div>
             @endif
 
-            <form method="post" action="../kategori">
+            <form method="post" action="{{ url('kategori') }}">
                 {{ csrf_field() }}
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="kodeKategori">Kode Kategori</label>
+                        <label for="kategori_kode">Kode Kategori</label>
 
                         {{-- <input id="kodeKategori" type="text" name="kodeKategori"
                         class="@error('kodeKategori') is-invalid @enderror">
@@ -38,11 +38,11 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror --}}
 
-                        <input type="text" class="form-control" id="kodeKategori" name="kodeKategori" placeholder="Contoh=A,B,C,D">
+                        <input type="text" class="form-control" id="kategori_kode" name="kategori_kode" placeholder="Contoh=A,B,C,D">
                     </div>
                     <div class="form-group">
-                        <label for="namaKategori">Nama Kategori</label>
-                        <input type="text" class="form-control" id="namaKategori" name="namaKategori" placeholder="Contoh=Elektronik dan Gadget">
+                        <label for="kategori_nama">Nama Kategori</label>
+                        <input type="text" class="form-control" id="kategori_nama" name="kategori_nama" placeholder="Contoh=Elektronik dan Gadget">
                     </div>
                 </div>
 

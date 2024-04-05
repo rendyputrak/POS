@@ -5,7 +5,7 @@
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <a class="btn btn-sm btn-primary mt-1" href="{{ url('kategori/create')}}">Tambah</a>
+                <a class="btn btn-sm btn-primary mt-1" href="{{ url('penjualan/create')}}">Tambah</a>
             </div>
         </div>
         <div class="card-body">
@@ -15,27 +15,32 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{session('error')}}</div>
             @endif
-            {{-- <div class="row">
+            <div class="row">
                 <div class="col-md-12">
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Filter:</label>
+                        {{-- <label class="col-1 control-label col-form-label">Filter:</label> --}}
                         <div class="col-3">
-                            <select class="form-control" id="kategori_id" name="kategori_id" required>
+                            {{-- <select class="form-control" id="level_id" name="level_id" required>
                                 <option value="">- Semua -</option>
-                                @foreach($kategori as $item)
-                                    <option value="{{ $item->kategori_id }}">{{ $item->kategori_nama }}</option>
+                                @foreach($level as $item)
+                                    <option value="{{ $item->level_id }}">{{ $item->level_nama }}</option>
                                 @endforeach
                             </select>
-                            <small class="form-text text-muted">Kategori Barang</small>
+                            <small class="form-text text-muted">Level Pengguna</small> --}}
                         </div>
                     </div>
                 </div>
-            </div> --}}
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_kategori">
+            </div>
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_penjualan">
                 <thead>
-                    <tr><th>No</th><th>ID</th><th>Kode Kategori</th><th>Nama Kategori</th><th>Aksi</th></tr>
+                    <tr><th>No</th><th>ID Penjualan</th><th>ID User</th><th>Pembeli</th><th>Kode Penjualan</th><th>Tanggal Penjualan</th><th>Aksi</th></tr>
                 </thead>
             </table>
+            {{-- <table class="table table-bordered table-striped table-hover table-sm" id="table_penjualan_detail">
+                <thead>
+                    <tr><th>No</th><th>ID Detail Penjualan</th><th>ID Penjualan</th><th>ID Barang</th><th>Harga</th><th>Jumlah</th><th>Aksi</th></tr>
+                </thead>
+            </table> --}}
         </div>
     </div>
 @endsection
@@ -46,15 +51,15 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            var dataKategori = $('#table_kategori').DataTable({
+            var datapenjualan = $('#table_penjualan').DataTable({
                 serverSide: true, // serverSide: true, jika ingin menggunakan server side processing
             ajax: {
-                "url": "{{ url('kategori/list') }}",
+                "url": "{{ url('penjualan/list') }}",
                 "dataType": "json",
                 "type": "POST",
-                // "data": function (d) {
-                //     d.kategori_id = $('#kategori_id').val();
-                // }
+                "data": function (d) {
+                    d.penjualan_id = $('#penjualan_id').val();
+                }
             },
             columns: [
                 {
@@ -63,17 +68,27 @@
                 orderable: false,
                 searchable: false
                 },{
-                data: "kategori_id",
+                data: "penjualan_id",
                 className: "",
                 orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                 searchable: true // searchable: true, jika ingin kolom ini bisa dicari
                 },{
-                data: "kategori_kode",
+                data: "user_id",
                 className: "",
                 orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                 searchable: true // searchable: true, jika ingin kolom ini bisa dicari
                 },{
-                data: "kategori_nama",
+                data: "pembeli",
+                className: "",
+                orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
+                searchable: true // searchable: true, jika ingin kolom ini bisa dicari
+                },{
+                data: "penjualan_kode",
+                className: "",
+                orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
+                searchable: true // searchable: true, jika ingin kolom ini bisa dicari
+                },{
+                data: "penjualan_tanggal",
                 className: "",
                 orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                 searchable: true // searchable: true, jika ingin kolom ini bisa dicari
@@ -86,9 +101,9 @@
         ]
     });
 
-    // $('#kategori_id').on('change', function(){
-    //     dataKategori.ajax.reload();
-    // })
+    $('#penjualan_id').on('change', function(){
+        datapenjualan.ajax.reload();
+    })
 
 });
 </script>
