@@ -83,6 +83,8 @@ class PenjualanController extends Controller
     public function show(string $id)
     {
         $penjualan = PenjualanModel::find($id);
+        $penjualanDetail = PenjualanDetailModel::find($id);
+        $barang = BarangModel::find($id);
 
         $breadcrumb = (object) [
             'title' => 'Detail penjualan',
@@ -95,7 +97,7 @@ class PenjualanController extends Controller
 
         $activeMenu = 'penjualan'; //set menu yang sedang aktif
 
-        return view('penjualan.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'penjualan' => $penjualan, 'activeMenu' => $activeMenu]);
+        return view('penjualan.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'penjualan' => $penjualan, 'penjualanDetail' => $penjualanDetail, 'barang' => $barang, 'activeMenu' => $activeMenu]);
     }
 
     /**
