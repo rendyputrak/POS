@@ -49,4 +49,6 @@ Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/register1', App\Http\Controllers\Api\RegisterController::class)->name('register1');
+Route::post('/barang1', App\Http\Controllers\Api\BarangController::class)->name('barang1');
 
