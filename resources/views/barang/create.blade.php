@@ -7,7 +7,8 @@
       <div class="card-tools"></div> 
     </div> 
     <div class="card-body"> 
-      <form method="POST" action="{{ url('barang') }}" class="form-horizontal">         @csrf 
+      <form method="POST" action="{{ url('barang') }}" class="form-horizontal" enctype="multipart/form-data">         
+        @csrf 
         <div class="form-group row"> 
           <label class="col-1 control-label col-form-label">Kategori ID</label> 
           <div class="col-11"> 
@@ -54,6 +55,15 @@
           <div class="col-11"> 
             <input type="text" class="form-control" id="harga_jual" name="harga_jual" value="{{ old('harga_jual') }}" required> 
             @error('harga_jual') 
+              <small class="form-text text-danger">{{ $message }}</small> 
+            @enderror 
+            </div> 
+        </div> 
+        <div class="form-group row"> 
+          <label class="col-1 control-label col-form-label">Gambar Barang</label> 
+          <div class="col-11"> 
+            <input type="file" class="form-control" id="image" name="image" required> 
+            @error('image') 
               <small class="form-text text-danger">{{ $message }}</small> 
             @enderror 
             </div> 

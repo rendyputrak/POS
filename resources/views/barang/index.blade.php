@@ -36,7 +36,7 @@
             </div>
             <table class="table table-bordered table-striped table-hover table-sm" id="table_barang">
                 <thead>
-                    <tr><th>No</th><th>ID</th><th>ID Kategori</th><th>Kode Barang</th><th>Nama Barang</th><th>Harga Beli</th><th>Harga Jual</th><th>Aksi</th></tr>
+                    <tr><th>No</th><th>ID</th><th>ID Kategori</th><th>Kode Barang</th><th>Nama Barang</th><th>Harga Beli</th><th>Harga Jual</th><th>Gambar Barang</th><th>Aksi</th></tr>
                 </thead>
             </table>
         </div>
@@ -95,6 +95,11 @@
                 className: "",
                 orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                 searchable: true // searchable: true, jika ingin kolom ini bisa dicari
+                },{
+                data: "image",
+                className: "",
+                orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
+                searchable: false // searchable: true, jika ingin kolom ini bisa dicari
                 },{
                 data: "aksi",
                 className: "",

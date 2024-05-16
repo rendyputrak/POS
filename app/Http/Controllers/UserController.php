@@ -61,14 +61,21 @@ class UserController extends Controller
             'nama' => 'required|string|max:100',
             'password' => 'required|min:5',
             'level_id' => 'required|integer',
+            'image' => 'required|file|image|max:5000',
         ]);
 
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+        } else {
+            $imagePath = null;
+        }
 
         UserModel::create([
             'username' => $request->username,
             'nama' => $request->nama,
             'password' => bcrypt($request->password),
-            'level_id' => $request->level_id
+            'level_id' => $request->level_id,
+            'image' => $imagePath,
         ]);
 
         return redirect('/user')->with('success', 'Data user berhasil disimpan');
@@ -127,14 +134,21 @@ class UserController extends Controller
             'nama' => 'required|string|max:100',
             'password' => 'nullable|min:5',
             'level_id' => 'required|integer',
+            'image' => 'required|file|image|max:5000',
         ]);
 
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+        } else {
+            $imagePath = null;
+        }
 
         UserModel::find($id)->update([
             'username' => $request->username,
             'nama' => $request->nama,
             'password' => $request->password ? bcrypt($request->password) : UserModel::find($id)->password,
-            'level_id' => $request->level_id
+            'level_id' => $request->level_id,
+            'image' => $imagePath,
         ]);
 
         return redirect('/user')->with('success', 'Data user berhasil diubah');
@@ -161,7 +175,7 @@ class UserController extends Controller
     // Ambil data user dalam bentuk json untuk datatables
     public function list(Request $request)
     {
-        $users = UserModel::select('user_id', 'username', 'nama', 'level_id')
+        $users = UserModel::select('user_id', 'username', 'nama', 'level_id', 'image')
                     ->with('level');
 
         //Filter data user berdasarkan level_id
@@ -171,6 +185,9 @@ class UserController extends Controller
         
         return DataTables::of($users)
             ->addIndexColumn() // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
+            ->editColumn('image', function ($users) {
+                return '<img src=""' . $users->image . '" alt="' . ' ' . '" height="50">';
+            })
             ->addColumn('aksi', function ($user) { // menambahkan kolom aksi
                 $btn = '<a href="'.url('/user/' . $user->user_id).'" class="btn btn-info btn-sm">Detail</a> ';
                 $btn .= '<a href="'.url('/user/' . $user->user_id . '/edit').'"class="btn btn-warning btn-sm">Edit</a> ';
@@ -181,7 +198,7 @@ class UserController extends Controller
                     ini?\');">Hapus</button></form>';
                 return $btn;
             })
-            ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi adalah html
+            ->rawColumns(['aksi', 'image']) // memberitahu bahwa kolom aksi adalah html
             ->make(true);
     }
 }

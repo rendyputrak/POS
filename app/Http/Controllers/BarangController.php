@@ -65,7 +65,14 @@ class BarangController extends Controller
             'barang_nama' => 'required',
             'harga_beli' => 'required|integer',
             'harga_jual' => 'required|integer',
+            'image' => 'required|file|image|max:5000',
         ]);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+        } else {
+            $imagePath = null;
+        }
 
         BarangModel::create([
             'kategori_id' => $request->kategori_id,
@@ -73,6 +80,8 @@ class BarangController extends Controller
             'barang_nama' => $request->barang_nama,
             'harga_beli' => $request->harga_beli,
             'harga_jual' => $request->harga_jual,
+            'image' => $imagePath,
+            'kategori_nama' => KategoriModel::find($request->kategori_id)->kategori_nama,
         ]);
 
         return redirect('/barang')->with('success', 'Data barang berhasil disimpan');
@@ -133,8 +142,14 @@ class BarangController extends Controller
             'barang_nama' => 'nullable',
             'harga_beli' => 'nullable|integer',
             'harga_jual' => 'nullable|integer',
+            'image' => 'nullable|file|image|max:5000',
         ]);
 
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+        } else {
+            $imagePath = null;
+        }
 
         BarangModel::find($id)->update([
             'kategori_id' => $request->kategori_id,
@@ -142,6 +157,7 @@ class BarangController extends Controller
             'barang_nama' => $request->barang_nama,
             'harga_beli' => $request->harga_beli,
             'harga_jual' => $request->harga_jual,
+            'image' => $imagePath,
         ]);
 
         return redirect('/barang')->with('success', 'Data barang berhasil diubah');
@@ -168,7 +184,7 @@ class BarangController extends Controller
     // Ambil data barang dalam bentuk json untuk datatables
     public function list(Request $request)
     {
-        $brg = BarangModel::select('barang_id', 'kategori_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual')
+        $brg = BarangModel::select('barang_id', 'kategori_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual', 'image')
                     ->with('kategori');
 
         //Filter data user berdasarkan level_id
@@ -178,6 +194,9 @@ class BarangController extends Controller
         
         return DataTables::of($brg)
             ->addIndexColumn() // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
+            ->editColumn('image', function ($barang) {
+                return '<img src=""' . $barang->image . '" alt="' . ' ' . '" height="50">';
+            })
             ->addColumn('aksi', function ($barang) { // menambahkan kolom aksi
                 $btn = '<a href="'.url('/barang/' . $barang->barang_id).'" class="btn btn-info btn-sm">Detail</a> ';
                 $btn .= '<a href="'.url('/barang/' . $barang->barang_id . '/edit').'"class="btn btn-warning btn-sm">Edit</a> ';
@@ -188,7 +207,7 @@ class BarangController extends Controller
                     ini?\');">Hapus</button></form>';
                 return $btn;
             })
-            ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi adalah html
+            ->rawColumns(['aksi', 'image']) // memberitahu bahwa kolom aksi adalah html
             ->make(true);
     }
 }

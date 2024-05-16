@@ -9,6 +9,7 @@ use App\Http\Controllers\POSController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\PenjualanController;
 use Illuminate\Support\Facades\Route;
@@ -148,3 +149,6 @@ Route::group(['middleware' => ['auth']], function(){
         Route::resource('manager', ManagerController::class);
     });
 });
+
+Route::get('/file-upload', [FileUploadController::class, 'fileUpload']);
+Route::post('/file-upload', [FileUploadController::class, 'prosesFileUpload']);
